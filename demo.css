@@ -85,3 +85,18 @@
 #content tr:active{
     background-color: #9A9A9A;
 }
+a:link{
+	color:blue;
+}
+a:visited{
+	color:blue;
+}
+a:hover{
+	color:blue;
+}
+a:active{
+	color:red;
+}
+
+
+

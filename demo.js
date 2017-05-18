@@ -74,9 +74,18 @@ dz.ondrop = function (ev) {
 	this.childNodes[1].childNodes[1].appendChild(frag);
 	//为什么是‘1’？文档里几乎每一样东西都是一个节点，甚至连空格和换行符都会被解释成节点。而且都包含在childNodes属性所返回的数组中.不同于jade模板
 }
+function blink()
+{
+  document.getElementById('content').style.borderColor = 'gray';
+}
 
 //ajax上传文件
 function upload(){
+	if(document.getElementsByTagName('tbody')[0].hasChildNodes()==false){
+		document.getElementById('content').style.borderColor = 'red';
+		setTimeout(blink,200);
+		return false;
+	}
 	var data=Dragfiles(); //获取formData
 	$.ajax({
 		url: 'upload',
@@ -106,3 +115,15 @@ $(".tbody").on('click','tr td:last-child',function(){
 	temp.delete(key);
 	$(this).parent().remove();
 });
+//清空所有内容
+function clearAll(){
+	if(document.getElementsByTagName('tbody')[0].hasChildNodes()==false){
+		document.getElementById('content').style.borderColor = 'red';
+		setTimeout(blink,300);
+		return false;
+	}
+	var data=Dragfiles(); 
+	data.deleteAll(); //清空formData
+	//$('.tbody').empty(); 等同于以下方法
+	document.getElementsByTagName('tbody')[0].innerHTML='';
+}
